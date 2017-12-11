@@ -44,7 +44,7 @@ public class Board {
 	 * @param vertical if ship is placed vertically
 	 * @return if ship successfully placed
 	 */
-	public boolean setShip(int x, int y, Ship ship, boolean vertical) {
+	public boolean setShip(int x, int y, Ship ship, boolean vertical, boolean print) {
 		if (x > 8 || x < 0) {
 			System.out.println("Invalid location");
 			return false;
@@ -56,26 +56,34 @@ public class Board {
 		int shipLength = ship.getLength();
 		if (vertical) {
 			if (x + shipLength > 9) {
+				if (print) {
 				System.out.println("Invalid location");
+			}
 				return false;
 			}
 		} else {
 			if (y + shipLength > 9) {
+				if (print) {
 				System.out.println("Invalid location");
+				}
 				return false;
 			}
 		}
 		if (vertical) {
 			for (int i = x; i < x + shipLength; i++) {
 				if (this.getBoard(i, y) == 'X') {
+					if (print) {
 					System.out.println("There is already a ship at this location.");
+					}
 					return false;
 				}
 			}
 		} else {
 			for (int i = y; i < y + shipLength; i++) {
 				if (this.getBoard(x, i) == 'X') {
+					if (print) {
 					System.out.println("There is already a ship at this location.");
+					}
 					return false;
 				}
 			}
@@ -93,7 +101,9 @@ public class Board {
 				ship.setCoords(coord, i - y);
 			}
 		}
+		if (print) {
 		System.out.println("Ship successfully placed.");
+		}
 		return true;
 	}
 	
